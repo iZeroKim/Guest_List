@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget{
       title: "Welcome to Flutter",
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Welcome to Flutter")
+          title: const Text("Random English Words")
         ),
         body: Center(
           child: RandomWords(),
@@ -38,9 +38,19 @@ class RandomWords extends StatefulWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
+  final _GeneratedPairs = <WordPair>[];
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
-    return Text(wordPair.asPascalCase);
+    return ListView.builder(
+      padding: const EdgeInsets.all(16.0),
+      itemBuilder: (context, i){
+        if(i.isOdd) return const Divider();
+        final index = i ~/ 2;
+        if(index >= _GeneratedPairs.length){
+          _GeneratedPairs.addAll(generateWordPairs().take(10));
+        }
+        return Text(_GeneratedPairs[index].asPascalCase);
+      },
+    );
   }
 }
