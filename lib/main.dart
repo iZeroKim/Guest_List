@@ -49,7 +49,11 @@ class _RandomWordsState extends State<RandomWords> {
         if(index >= _GeneratedPairs.length){
           _GeneratedPairs.addAll(generateWordPairs().take(10));
         }
-        return Text(_GeneratedPairs[index].asPascalCase);
+        return ListTile(
+          title: Text(
+            _GeneratedPairs[index].asPascalCase
+          ),
+        );
       },
     );
   }
